@@ -1,0 +1,29 @@
+@import "../node_modules/normalize.css/normalize.css";
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+
+  &__sideBar {
+    width: 25%;
+    height: 100%;
+    padding: 20px;
+    background-color: black;
+  }
+  &__main {
+    width: 75%;
+    background-color: whitesmoke;
+    padding: 20px 40px;
+  }
+}
+
+.button {
+  border-radius: 10px;
+  padding: 4px;
+}
