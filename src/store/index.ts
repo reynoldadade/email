@@ -22,26 +22,42 @@ export const useAppStore = defineStore("main", () => {
   ]);
 
   const selectedMails: Ref<Mail[]> = ref([]);
+  const selectedMail: Ref<Mail | null> = ref(null);
+  const showModal: Ref<boolean> = ref(false);
 
   function markAsRead() {
-    selectedMails.value.forEach((mail) => {
-      const index = mails.value.findIndex(
-        (object) => object.title === mail.title
-      );
-      mails.value[index].state = Status.Read;
-    });
+    selectedMails.value.forEach((mail) => markSingleAsRead(mail));
     // reset mail
     selectedMails.value = [];
   }
+
+  function markSingleAsRead(payload: Mail | null) {
+    if (payload === null) {
+      return;
+    }
+    const index = mails.value.findIndex(
+      (object) => object.title === payload.title
+    );
+    mails.value[index].state = Status.Read;
+  }
+
+  function sendSingleToArchive(payload: Mail | null) {
+    if (payload === null) {
+      return;
+    }
+    const index = mails.value.findIndex(
+      (object) => object.title === payload.title
+    );
+    mails.value[index].folder = Folder.Archive;
+  }
   function sendToArchive() {
-    selectedMails.value.forEach((mail) => {
-      const index = mails.value.findIndex(
-        (object) => object.title === mail.title
-      );
-      mails.value[index].folder = Folder.Archive;
-    });
+    selectedMails.value.forEach((mail) => sendSingleToArchive(mail));
     // reset mail
     selectedMails.value = [];
+  }
+
+  function toggleModal() {
+    showModal.value = !showModal.value;
   }
 
   // inbox mails
@@ -58,5 +74,10 @@ export const useAppStore = defineStore("main", () => {
     archive,
     selectedMails,
     sendToArchive,
+    sendSingleToArchive,
+    markSingleAsRead,
+    toggleModal,
+    selectedMail,
+    showModal,
   };
 });
