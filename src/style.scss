@@ -15,6 +15,9 @@
     height: 100%;
     padding: 20px;
     background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   &__main {
     width: 75%;
@@ -23,7 +26,31 @@
   }
 }
 
-.button {
-  border-radius: 10px;
+.links {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+  }
+}
+
+.item {
+  border-radius: 8px;
   padding: 4px;
+  margin: 0 10px;
+}
+
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
 }
